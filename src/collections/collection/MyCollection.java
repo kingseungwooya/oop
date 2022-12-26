@@ -1,5 +1,7 @@
 package collections.collection;
 
+import collections.iterator.MyIterator;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -37,5 +39,22 @@ public class MyCollection<T> {
             T data = list.get(i);
             consumer.accept(data);
         }
+    }
+
+    // Iterator을 구현해보자 익명클래스를 이용해 구현
+    public MyIterator<T> iterator() {
+        return new MyIterator<T>() {
+            private int index = 0;
+
+            @Override
+            public boolean hasNext() {
+                return index < list.size();
+            }
+
+            @Override
+            public T next() {
+                return list.get(index++);
+            }
+        };
     }
 }
